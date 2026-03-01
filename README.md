@@ -12,4 +12,4 @@ Session and Device Monitoring – Tracks user sessions, IP addresses, device fin
 
 Customizable Alerts – Provides email notifications, dashboard alerts, and optional two-factor authentication triggers for sensitive activities.
 
-This project was built using Node.js, Express, MongoDB, and HBS, this framework is lightweight, extensible, and adaptable for both personal and enterprise cybersecurity applications.
+This project was built using Node.js, Express, MongoDB, and HBS, this framework is lightweight, extensible, and adaptable for both personal and enterprise cybersecurity applications.# ai-cyber-defense

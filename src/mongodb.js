@@ -21,12 +21,71 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    lastLoginCountry: {   // <-- add this
+        type: String,
+        default: "Unknown"
+    },
+    lastDevice: {         // <-- add this
+        type: String,
+        default: "Unknown"
+    },
+    isVerified: {           // <-- add this
+        type: Boolean,
+        default: false
+    },
+     // ✅ ADD THESE
+    emailToken: {
+       type: String
+    },
+    emailTokenExpiry: {
+        Date
+    },
+
+     // ✅ NEW FIELDS FOR ACTIVE SESSION & PASSWORD RESET ALERT
+    activeSession: {        // tracks if the user is currently logged in
+        type: Boolean,
+        default: false
+    },
+    passwordResetToken:{
+       type: String
+    },   // token for resetting password
+    passwordResetExpiry: {
+        Date
+    },     // expiry time for the reset token
+    isBlocked: {
+        type: Boolean,
+        default: false
     }
 });
 
 const collection = new mongoose.model("Collection1", UserSchema);
 
-module.exports = collection;
+
+/* ============================
+   THREAT LOG SCHEMA
+============================ */
+
+const ThreatSchema = new mongoose.Schema({
+    email: String,
+    ipAddress: String,
+    country: String,
+    device: String,
+    threatScore: Number,
+    riskLevel: {
+        type: String,
+        enum: ["Low", "Medium", "High"]
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+const ThreatLog = mongoose.model("ThreatLog", ThreatSchema);
+
+
+module.exports = {collection, ThreatLog};
 
 
 //password
