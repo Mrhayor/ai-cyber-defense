@@ -184,7 +184,7 @@ app.post("/login", async (req, res) => {
         const user = await collection.findOne({ email });
         if (!user) return res.send("User not found");
 
-        // 🔒 BLOCK CHECK (PUT IT HERE)
+        // BLOCK CHECK (PUT IT HERE)
         if (user.isBlocked) {
             return res.send("Account blocked due to suspicious activity.");
         }
@@ -243,7 +243,7 @@ app.post("/login", async (req, res) => {
             await transporter.sendMail({
                 from: process.env.EMAIL_USER,
                 to: user.email,
-                subject: "⚠️ Account Login Alert",
+                subject: "Account Login Alert",
                 html: `
                     <h3>Hello ${user.fullname}</h3>
                     <p>Someone tried to log in to your account.</p>
@@ -253,7 +253,7 @@ app.post("/login", async (req, res) => {
                 `
             });
 
-            return res.send("⚠️ Suspicious login or active session detected. Alert email sent.");
+            return res.send("Suspicious login or active session detected. Alert email sent.");
         }
 
         // === Normal login ===
@@ -306,7 +306,7 @@ app.post("/reset-password", async (req, res) => {
         }
     );
 
-    res.send("✅ Password changed successfully. You can now log in.");
+    res.send("Password changed successfully. You can now log in.");
 });
 
 /* ============================
@@ -462,7 +462,7 @@ async function startServer() {
         await trainModel("data.json");
 
         const port = process.env.PORT || 5000;
-        app.listen(port, () => console.log(`✅ Server running on port: ${port}`));
+        app.listen(port, () => console.log(`Server running on port: ${port}`));
 
     } catch (err) {
         console.error("Fatal startup error:", err);

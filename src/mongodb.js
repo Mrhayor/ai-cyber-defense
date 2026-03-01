@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-     // ✅ ADD THESE
+     // ADD THESE
     emailToken: {
        type: String
     },
@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
         Date
     },
 
-     // ✅ NEW FIELDS FOR ACTIVE SESSION & PASSWORD RESET ALERT
+     // NEW FIELDS FOR ACTIVE SESSION & PASSWORD RESET ALERT
     activeSession: {        // tracks if the user is currently logged in
         type: Boolean,
         default: false
