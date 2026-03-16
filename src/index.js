@@ -1,3 +1,5 @@
+
+
 require("dotenv").config();
 
 const express = require("express");
@@ -110,15 +112,18 @@ app.get("/verify-email", async (req, res) => {
 
         const user = await collection.findOne({
             emailToken: token,
-            emailTokenExpiry: { $gt: Date.now() }
+            emailTokenExpiry: { $gt: new Date() }
         });
         if (!user) return res.send("Token expired or invalid.");
 
         await collection.updateOne(
             { _id: user._id },
-            { $set: { isVerified: true }, $unset: { emailToken: "", emailTokenExpiry: "" } }
+            { 
+                $set: { isVerified: true },
+                $unset: { emailToken: "", emailTokenExpiry: "" } 
+            }
         );
-
+console.log("Verification token received:", token);
         res.redirect("/login");
     } catch (err) {
         console.error("Email verification error:", err);
@@ -140,7 +145,7 @@ app.post("/signup", async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const token = crypto.randomBytes(32).toString("hex");
-        const tokenExpiry = Date.now() + 24 * 60 * 60 * 1000; // 24h
+        const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
         await collection.create({
             fullname,

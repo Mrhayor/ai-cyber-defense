@@ -8,6 +8,8 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log("Failed to connect to MongoDB", err);
 });
 
+
+
 const UserSchema = new mongoose.Schema({
     fullname: {
         type: String,
@@ -39,7 +41,7 @@ const UserSchema = new mongoose.Schema({
        type: String
     },
     emailTokenExpiry: {
-        Date
+       type: Date
     },
 
      // NEW FIELDS FOR ACTIVE SESSION & PASSWORD RESET ALERT
@@ -51,7 +53,7 @@ const UserSchema = new mongoose.Schema({
        type: String
     },   // token for resetting password
     passwordResetExpiry: {
-        Date
+       type: Date
     },     // expiry time for the reset token
     isBlocked: {
         type: Boolean,
